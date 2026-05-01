@@ -1,5 +1,11 @@
 # @mfe-forge/core
 
+## 5.0.0
+
+### Major Changes
+
+- docs and lisence setting
+
 ## 4.0.0
 
 ### Major Changes
