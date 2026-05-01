@@ -1,6 +1,6 @@
 {
   "name": "@mfe-forge/design",
-  "version": "1.0.0",
+  "version": "3.0.0",
   "description": "Design system utilities for MFE Forge",
   "type": "module",
   "main": "./dist/index.js",
@@ -15,6 +15,9 @@
       "types": "./dist/tokens.d.ts"
     }
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup src/index.ts src/tokens.ts --format esm --dts",
     "dev": "tsup src/index.ts src/tokens.ts --format esm --dts --watch",

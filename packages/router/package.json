@@ -1,6 +1,6 @@
 {
   "name": "@mfe-forge/router",
-  "version": "1.0.0",
+  "version": "3.0.0",
   "description": "Routing coordination utilities for MFE Forge",
   "type": "module",
   "main": "./dist/index.js",
@@ -11,6 +11,9 @@
       "types": "./dist/index.d.ts"
     }
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup src/index.tsx --format esm --dts --external react,react-dom,react-router-dom",
     "dev": "tsup src/index.tsx --format esm --dts --watch --external react,react-dom,react-router-dom",
