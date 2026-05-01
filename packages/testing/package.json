@@ -1,0 +1,33 @@
+{
+  "name": "@mfe-forge/testing",
+  "version": "1.0.0",
+  "description": "Testing utilities for MFE Forge",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsup src/index.tsx --format esm --dts --external react,@testing-library/react",
+    "dev": "tsup src/index.tsx --format esm --dts --watch --external react,@testing-library/react",
+    "type-check": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "@testing-library/react": "^16.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "~5.8.3",
+    "vitest": "^1.5.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "MIT"
+}

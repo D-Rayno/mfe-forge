@@ -1,0 +1,31 @@
+{
+  "name": "@mfe-forge/store",
+  "version": "1.0.0",
+  "description": "Shared state management for MFE Forge",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts --external zustand",
+    "dev": "tsup src/index.ts --format esm --dts --watch --external zustand",
+    "type-check": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "zustand": "^5.0.0"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.0",
+    "typescript": "~5.8.3",
+    "zustand": "^5.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  {{#apps}}
+  {{camelName}}:
+    build:
+      context: .
+      dockerfile: apps/{{scope}}/{{name}}/Dockerfile
+    ports:
+      - "{{port}}:80"
+    networks:
+      - mfe-network
+  {{/apps}}
+
+networks:
+  mfe-network:
+    driver: bridge

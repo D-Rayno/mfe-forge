@@ -1,0 +1,37 @@
+{
+  "name": "mfe-forge",
+  "version": "1.0.0",
+  "description": "Production-ready Micro Frontend framework for Vite + React + Module Federation",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "templates/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    "format": "prettier --write .",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "changeset publish",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.27.1",
+    "prettier": "^3.2.5",
+    "turbo": "^2.0.0",
+    "typescript": "~5.8.3",
+    "vitepress": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "bun": ">=1.1.0",
+    "pnpm": ">=9.0.0"
+  },
+  "packageManager": "bun@1.1.0"
+}
