@@ -1,5 +1,11 @@
 # @mfe-forge/store
 
+## 4.0.0
+
+### Major Changes
+
+- init
+
 ## 3.0.0
 
 ### Major Changes
