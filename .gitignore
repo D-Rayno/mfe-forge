@@ -1,0 +1,17 @@
+node_modules
+.DS_Store
+dist
+*.log
+.bun
+bun.lockb
+.env
+.env.*
+!.env.example
+
+# Turborepo
+.turbo
+.npmrc
+
+# VitePress
+docs/.vitepress/dist
+docs/.vitepress/cache
