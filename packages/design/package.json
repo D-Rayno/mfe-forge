@@ -1,6 +1,6 @@
 {
   "name": "@mfe-forge/design",
-  "version": "8.0.6",
+  "version": "8.0.7",
   "description": "Design system utilities for MFE Forge",
   "type": "module",
   "main": "./dist/index.js",

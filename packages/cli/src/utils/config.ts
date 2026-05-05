@@ -4,10 +4,6 @@ import path from 'path'
 import fs from 'fs-extra'
 import type { MFEConfig } from '../types/index.js'
 
-/**
- * Zod schema for validating and providing defaults to the MFE Forge configuration.
- * Each section has sensible defaults so users only need to specify overrides.
- */
 const configSchema = z.object({
   name: z.string().min(1),
   organization: z.string().optional(),
@@ -75,11 +71,9 @@ const configSchema = z.object({
     .default({}),
 })
 
-/** Cosmiconfig explorer for finding mfeforge config files (mfeforge.config.ts, .mfeforgerc, etc.) */
+// No custom .ts loader — let cosmiconfig use its default JS loader for .js files
+// .ts files require compilation so they're searched but may not load at runtime
 const explorer = cosmiconfigSync('mfeforge', {
-  loaders: {
-    '.ts': () => ({}),
-  },
   searchPlaces: [
     'mfeforge.config.js',
     'mfeforge.config.ts',
@@ -89,70 +83,45 @@ const explorer = cosmiconfigSync('mfeforge', {
   ],
 })
 
-/**
- * Loads and validates the MFE Forge configuration from the project root.
- * Uses cosmiconfig to search for `mfeforge.config.ts`, `.mfeforgerc`, etc.
- * If no config file is found, returns a default configuration.
- *
- * @param cwd - Working directory to search for config (defaults to process.cwd())
- * @returns Validated and fully-resolved MFE configuration
- */
 export function loadConfig(cwd = process.cwd()): MFEConfig {
-  const result = explorer.search(cwd)
+  let rawConfig: Record<string, any> = {}
 
-  if (!result || result.isEmpty) {
-    const defaultConfig = configSchema.parse({ name: 'mfe-project' })
-    return defaultConfig as MFEConfig
+  try {
+    const result = explorer.search(cwd)
+    if (result && !result.isEmpty && result.config) {
+      rawConfig = result.config
+    }
+  } catch {
+    // Config file found but couldn't be parsed (e.g. ESM issues at runtime)
+    // Fall through and use defaults with directory name
   }
 
-  const parsed = configSchema.parse(result.config)
+  // Always inject a name fallback so the schema never fails on a missing name
+  const configData = {
+    name: path.basename(cwd),
+    ...rawConfig,
+  }
+
+  const parsed = configSchema.parse(configData)
   return parsed as MFEConfig
 }
 
-/**
- * Persists the given configuration to `mfeforge.config.ts` in the project root.
- * Wraps the config in a `defineConfig()` call for type safety.
- *
- * @param config - Partial config to write (will be JSON-serialized)
- * @param cwd - Directory to write the config file to
- */
 export async function saveConfig(config: Partial<MFEConfig>, cwd = process.cwd()) {
-  const configPath = path.join(cwd, 'mfeforge.config.ts')
-  const content = `import { defineConfig } from 'mfe-forge';
-
-export default defineConfig(${JSON.stringify(config, null, 2)});
-`
+  const configPath = path.join(cwd, 'mfeforge.config.js')
+  const content = `/** @type {import('mfe-forge').MFEConfig} */\nexport default ${JSON.stringify(config, null, 2)};\n`
   await fs.writeFile(configPath, content)
 }
 
-/**
- * Identity function that provides TypeScript autocomplete for MFE Forge configuration.
- * Use this in `mfeforge.config.ts` for IDE support.
- *
- * @example
- * ```ts
- * import { defineConfig } from 'mfe-forge'
- * export default defineConfig({ name: 'my-project' })
- * ```
- */
 export function defineConfig(config: Partial<MFEConfig>): Partial<MFEConfig> {
   return config
 }
 
-/**
- * Builds the complete project context by loading the config and discovering
- * the filesystem layout (apps directory, packages directory, scopes).
- *
- * @param cwd - Project root directory (defaults to process.cwd())
- * @returns Project context with config, directory paths, and discovered scopes
- */
 export function getProjectContext(cwd = process.cwd()) {
   const config = loadConfig(cwd)
   const rootDir = cwd
   const appsDir = path.join(rootDir, 'apps')
   const packagesDir = path.join(rootDir, 'packages')
 
-  // Discover scopes from filesystem by finding directories that contain sub-app directories
   const scopes: string[] = []
   if (fs.existsSync(appsDir)) {
     const entries = fs.readdirSync(appsDir, { withFileTypes: true })
