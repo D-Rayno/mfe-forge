@@ -76,7 +76,18 @@ const configSchema = z.object({
 })
 
 /** Cosmiconfig explorer for finding mfeforge config files (mfeforge.config.ts, .mfeforgerc, etc.) */
-const explorer = cosmiconfigSync('mfeforge')
+const explorer = cosmiconfigSync('mfeforge', {
+  loaders: {
+    '.ts': () => ({}),
+  },
+  searchPlaces: [
+    'mfeforge.config.js',
+    'mfeforge.config.ts',
+    '.mfeforgerc',
+    '.mfeforgerc.json',
+    'package.json',
+  ],
+})
 
 /**
  * Loads and validates the MFE Forge configuration from the project root.

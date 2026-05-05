@@ -1,6 +1,6 @@
 {
   "name": "mfe-forge",
-  "version": "8.0.2",
+  "version": "8.0.6",
   "description": "CLI for scaffolding and managing Micro Frontend architectures",
   "type": "module",
   "bin": {
@@ -39,6 +39,7 @@
     "ora": "^8.0.0",
     "portfinder": "^1.0.32",
     "semver": "^7.6.0",
+    "typescript": "~5.8.3",
     "yaml": "^2.4.0",
     "zod": "^3.22.0"
   },
@@ -47,8 +48,7 @@
     "@types/inquirer": "^9.0.7",
     "@types/mustache": "^4.2.5",
     "@types/semver": "^7.5.8",
-    "tsup": "^8.0.0",
-    "typescript": "~5.8.3"
+    "tsup": "^8.0.0"
   },
   "engines": {
     "node": ">=20.0.0"

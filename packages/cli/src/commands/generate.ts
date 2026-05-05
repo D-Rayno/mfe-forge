@@ -15,6 +15,9 @@ import {
   getPackageName,
   injectIntoFile,
 } from '../utils/files.js'
+import { createRequire } from 'module'
+const require = createRequire(import.meta.url)
+const pkg = require('../../package.json')
 
 export const generateCommand = new Command('generate')
   .alias('g')
@@ -91,6 +94,7 @@ export const generateCommand = new Command('generate')
         features: options.features ? options.features.split(',') : [],
         hasScope,
         depth: hasScope ? '../../..' : '../../..',
+        mfeForgeVersion: pkg.version,
       }
 
       const templateName = type === 'design-system' ? 'design-system' : type

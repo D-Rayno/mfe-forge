@@ -13,9 +13,9 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@mfe-forge/core": "^1.0.0",
-    "@mfe-forge/router": "^1.0.0",
-    "@mfe-forge/store": "^1.0.0",
+    "@mfe-forge/core": "{{mfeForgeVersion}}",
+    "@mfe-forge/router": "{{mfeForgeVersion}}",
+    "@mfe-forge/store": "{{mfeForgeVersion}}",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.5.0",

@@ -6,6 +6,9 @@ import fs from 'fs-extra'
 import path from 'path'
 import { execa } from 'execa'
 import type { MFEConfig } from '../types/index.js'
+import { createRequire } from 'module'
+const require = createRequire(import.meta.url)
+const pkg = require('../../package.json')
 
 export const initCommand = new Command('init')
   .description('Initialize a new MFE Forge project')
@@ -107,8 +110,8 @@ export const initCommand = new Command('init')
       }
 
       await fs.writeFile(
-        path.join(targetDir, 'mfeforge.config.ts'),
-        `export default ${JSON.stringify(config, null, 2)};`
+        path.join(targetDir, 'mfeforge.config.js'),
+        `/** @type {import('mfe-forge').MFEConfig} */\nexport default ${JSON.stringify(config, null, 2)};\n`
       )
 
       const rootPkg = {
@@ -127,7 +130,7 @@ export const initCommand = new Command('init')
           mfe: 'mfe-forge',
         },
         devDependencies: {
-          'mfe-forge': '^1.0.0',
+          'mfe-forge': `^${pkg.version}`,
           typescript: '~5.8.3',
           prettier: '^3.2.5',
           eslint: '^8.57.0',
