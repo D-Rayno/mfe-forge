@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://raw.githubusercontent.com/D-Rayno/mfe-forge/main/logo.webp" alt="MFE Forge Logo" width="200" />
+</p>
+
 # MFE Forge
 
 [![npm version](https://badge.fury.io/js/mfe-forge.svg)](https://www.npmjs.com/package/mfe-forge)

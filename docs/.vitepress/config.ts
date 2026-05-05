@@ -7,6 +7,7 @@ export default defineConfig({
   ignoreDeadLinks: true,
 
   themeConfig: {
+    logo: '/logo.webp',
     nav: [
       { text: 'Guide', link: '/getting-started' },
       { text: 'CLI', link: '/cli' },
