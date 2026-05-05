@@ -17,6 +17,7 @@ npm whoami
 ### 2. Ensure Package Names Are Available
 
 Check availability:
+
 ```bash
 npm view mfe-forge
 npm view @mfe-forge/core
@@ -27,12 +28,14 @@ npm view @mfe-forge/testing
 ```
 
 If taken, consider alternatives:
+
 - `mfe-forge` → `@D-Rayno/mfe-forge`
 - Or namespace everything: `@mfe-forge/cli`, `@mfe-forge/core`, etc.
 
 ### 3. Update package.json Files
 
 Ensure each package has:
+
 - Correct `name` and `version`
 - `publishConfig.access: "public"` (for scoped packages)
 - `files` array includes only what's needed

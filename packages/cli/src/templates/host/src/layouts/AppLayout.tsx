@@ -12,10 +12,10 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
     <div className="flex h-screen">
       <aside className="w-64 border-r border-border bg-card">
         <div className="p-6">
-          <h1 className="text-xl font-bold">{{pascalName}}</h1>
+          <h1 className="text-xl font-bold">{{ pascalName }}</h1>
         </div>
         <nav className="px-4 space-y-1">
-          {navItems.map(item => (
+          {navItems.map((item) => (
             <Link
               key={item.path}
               to={item.path}
@@ -30,9 +30,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
           ))}
         </nav>
       </aside>
-      <main className="flex-1 overflow-auto">
-        {children}
-      </main>
+      <main className="flex-1 overflow-auto">{children}</main>
     </div>
   )
 }

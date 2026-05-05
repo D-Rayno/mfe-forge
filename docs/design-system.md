@@ -34,7 +34,7 @@ export const customTokens = {
   },
   spacing: {
     '3xl': '4rem',
-  }
+  },
 } as const
 ```
 
@@ -93,11 +93,11 @@ export const Primary: Story = {
 All apps share the same Tailwind theme through CSS variables:
 
 ```css
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   --color-primary: oklch(0.82 0.2 128);
-  --font-sans: "Inter", system-ui, sans-serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
 }
 ```
 
@@ -111,11 +111,7 @@ import { useGlobalStore } from '@mfe-forge/store'
 function ThemeToggle() {
   const { theme, setTheme } = useGlobalStore()
 
-  return (
-    <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
-      Toggle Theme
-    </button>
-  )
+  return <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>Toggle Theme</button>
 }
 ```
 
@@ -123,12 +119,12 @@ Add to your CSS:
 
 ```css
 @layer base {
-  [data-theme="dark"] {
+  [data-theme='dark'] {
     --color-background: oklch(0.145 0 0);
     --color-foreground: oklch(0.985 0 0);
   }
 
-  [data-theme="light"] {
+  [data-theme='light'] {
     --color-background: oklch(0.985 0 0);
     --color-foreground: oklch(0.145 0 0);
   }

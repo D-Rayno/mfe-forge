@@ -1,5 +1,5 @@
 {
-  "name": "mfe-forge",
+  "name": "mfe-forge-monorepo",
   "version": "1.0.0",
   "description": "Production-ready Micro Frontend framework for Vite + React + Module Federation",
   "private": true,

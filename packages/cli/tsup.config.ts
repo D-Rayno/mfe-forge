@@ -23,6 +23,6 @@ export default defineConfig({
     'portfinder',
     'node-fetch',
     'semver',
-    'yaml'
-  ]
+    'yaml',
+  ],
 })

@@ -21,8 +21,9 @@ bun add @mfe-forge/router
 ## Usage
 
 ### MFE Router
+
 ```tsx
-import { MFERouter } from '@mfe-forge/router';
+import { MFERouter } from '@mfe-forge/router'
 
 const App = () => (
   <MFERouter base="/dashboard">
@@ -30,7 +31,7 @@ const App = () => (
       <Route path="/" element={<Home />} />
     </Routes>
   </MFERouter>
-);
+)
 ```
 
 ## License

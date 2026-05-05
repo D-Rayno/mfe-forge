@@ -38,6 +38,7 @@ bun dev
 ```
 
 This starts all MFEs in parallel:
+
 - Host on `http://localhost:3000`
 - Auth on `http://localhost:3001`
 - Dashboard on `http://localhost:3002`

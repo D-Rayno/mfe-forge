@@ -37,7 +37,7 @@ jobs:
     needs: [lint-and-typecheck, test]
     strategy:
       matrix:
-        scope: [{{scopes}}]
+        scope: [{ { scopes } }]
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v1

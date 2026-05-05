@@ -17,7 +17,7 @@
   },
   "files": [
     "dist",
-    "templates"
+    "src/templates"
   ],
   "scripts": {
     "build": "tsup src/bin/index.ts src/index.ts --format esm --dts --clean --shims",
@@ -66,9 +66,13 @@
     "mfe"
   ],
   "license": "MIT",
+  "homepage": "https://d-rayno.github.io/mfe-forge/",
   "repository": {
     "type": "git",
     "url": "https://github.com/D-Rayno/mfe-forge.git",
     "directory": "packages/cli"
+  },
+  "bugs": {
+    "url": "https://github.com/D-Rayno/mfe-forge/issues"
   }
 }

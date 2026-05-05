@@ -54,16 +54,19 @@ mfe-forge --version
 ## Tab Completion
 
 ### Bash
+
 ```bash
 mfe-forge completion bash >> ~/.bashrc
 ```
 
 ### Zsh
+
 ```bash
 mfe-forge completion zsh >> ~/.zshrc
 ```
 
 ### Fish
+
 ```bash
 mfe-forge completion fish > ~/.config/fish/completions/mfe-forge.fish
 ```

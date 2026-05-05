@@ -21,13 +21,14 @@ bun add @mfe-forge/store
 ## Usage
 
 ### Creating a Sync Store
+
 ```ts
-import { createSyncStore } from '@mfe-forge/store';
+import { createSyncStore } from '@mfe-forge/store'
 
 const useUserStore = createSyncStore('user', (set) => ({
   name: 'Guest',
   setName: (name) => set({ name }),
-}));
+}))
 ```
 
 ## License

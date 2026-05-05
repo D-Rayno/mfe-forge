@@ -36,9 +36,11 @@ MFE Forge is a **production-ready Micro Frontend framework** that transforms the
 ## Package Ecosystem
 
 ### `mfe-forge` (CLI)
+
 The command-line interface that developers interact with. Published to npm as `mfe-forge`.
 
 **Commands:**
+
 - `init` — Scaffold new projects
 - `generate` — Create apps, hosts, packages
 - `dev` — Orchestrate dev servers
@@ -49,43 +51,53 @@ The command-line interface that developers interact with. Published to npm as `m
 - `config` — Manage configuration
 
 ### `@mfe-forge/core`
+
 Runtime utilities for resilient MFE applications.
 
 **Features:**
+
 - `MFErrorBoundary` — Graceful error handling with retry
 - `EventBus` — Cross-MFE communication without coupling
 - `RemoteLoader` — Lazy-loaded remote components with fallback
 - `LazyRemote` — Higher-order component for remote loading
 
 ### `@mfe-forge/router`
+
 Routing coordination for multi-MFE navigation.
 
 **Features:**
+
 - `useMFENavigation` — Cross-scope navigation hook
 - `useRouteSync` — Sync route changes with event bus
 - `generateRoutes` — Dynamic route generation from registry
 - `createRouteGuard` — Auth/permission-based route guards
 
 ### `@mfe-forge/store`
+
 Shared state management across MFEs.
 
 **Features:**
+
 - `useGlobalStore` — Singleton global state (user, theme, locale)
 - `createScopedStore` — MFE-specific state factories
 - `syncStoreAcrossMFEs` — Bidirectional state synchronization
 
 ### `@mfe-forge/design`
+
 Design system foundation.
 
 **Features:**
+
 - `tokens` — Type-safe design tokens (colors, spacing, typography)
 - `applyTokens` — Runtime CSS variable application
 - Extensible token system for custom themes
 
 ### `@mfe-forge/testing`
+
 Testing utilities for MFE architectures.
 
 **Features:**
+
 - `renderMFE` — Render with common providers
 - `mockRemoteModule` — Mock federated modules in tests
 - `waitForRemoteLoad` — Async remote loading in tests
@@ -94,6 +106,7 @@ Testing utilities for MFE architectures.
 ## Templates
 
 ### App Template
+
 - Vite + React + TypeScript
 - Tailwind CSS with design tokens
 - Module Federation remote config
@@ -102,6 +115,7 @@ Testing utilities for MFE architectures.
 - Vitest + Playwright ready
 
 ### Host Template
+
 - Shell application with navigation layout
 - Auto-discovering remotes configuration
 - TypeScript declarations for remotes
@@ -109,17 +123,20 @@ Testing utilities for MFE architectures.
 - Global state provider
 
 ### Package Template
+
 - TypeScript library setup
 - Workspace dependency resolution
 - Entry point scaffolding
 
 ### Design System Template
+
 - Storybook configuration
 - Token system integration
 - Component scaffolding (Button, Card, Input)
 - `cn()` utility for Tailwind class merging
 
 ### Library Template
+
 - Generic TypeScript library
 - tsup build configuration
 - Export scaffolding
@@ -142,6 +159,7 @@ apps/
 ```
 
 **Rules:**
+
 1. Each scope has exactly one host
 2. Hosts only discover remotes in their scope
 3. Cross-scope communication via event bus
@@ -187,23 +205,23 @@ export default {
   defaults: {
     framework: 'react',
     styling: 'tailwind',
-    packageManager: 'bun'
+    packageManager: 'bun',
   },
   federation: {
-    shared: ['react', 'react-dom', 'react-router-dom']
+    shared: ['react', 'react-dom', 'react-router-dom'],
   },
   dev: {
     portRange: [3000, 3999],
-    autoStartHost: true
+    autoStartHost: true,
   },
   testing: {
     unit: 'vitest',
-    e2e: 'playwright'
+    e2e: 'playwright',
   },
   ci: {
     provider: 'github',
-    docker: true
-  }
+    docker: true,
+  },
 }
 ```
 
@@ -240,16 +258,16 @@ mfe-forge build
 
 ## Why MFE Forge?
 
-| Without MFE Forge | With MFE Forge |
-|-------------------|----------------|
-| Manual port management | Auto-detected ports |
-| Hand-edited vite configs | Auto-registered remotes |
+| Without MFE Forge          | With MFE Forge           |
+| -------------------------- | ------------------------ |
+| Manual port management     | Auto-detected ports      |
+| Hand-edited vite configs   | Auto-registered remotes  |
 | No type safety across MFEs | Auto-synced declarations |
-| Complex dev orchestration | Single `bun dev` command |
-| Inconsistent tooling | Standardized templates |
-| No error boundaries | Built-in resilience |
-| Ad-hoc communication | Event bus pattern |
-| Manual CI/CD setup | Generated workflows |
+| Complex dev orchestration  | Single `bun dev` command |
+| Inconsistent tooling       | Standardized templates   |
+| No error boundaries        | Built-in resilience      |
+| Ad-hoc communication       | Event bus pattern        |
+| Manual CI/CD setup         | Generated workflows      |
 
 ## Roadmap
 

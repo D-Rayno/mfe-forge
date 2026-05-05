@@ -11,10 +11,11 @@ This guide will walk you through creating a complete Micro Frontend architecture
 ## Step 1: Initialize Your Project
 
 ```bash
-npx mfe-forge init stockly-platform
+npx mfe-forge init appname-platform
 ```
 
 This creates:
+
 - Workspace configuration
 - Base TypeScript config
 - `mfeforge.config.ts` with your preferences
@@ -22,24 +23,25 @@ This creates:
 
 ## Step 2: Create Your First Scope
 
-Scopes organize MFEs by team or product. Let's create a `stockly` scope:
+Scopes organize MFEs by team or product. Let's create a `appname` scope:
 
 ```bash
-cd stockly-platform
-npx mfe-forge generate host stockly/host
+cd appname-platform
+npx mfe-forge generate host appname/host
 ```
 
-This scaffolds a host application at `apps/stockly/host` on port 3000.
+This scaffolds a host application at `apps/appname/host` on port 3000.
 
 ## Step 3: Add Micro Frontends
 
 ```bash
-npx mfe-forge generate app stockly/auth
-npx mfe-forge generate app stockly/dashboard
-npx mfe-forge generate app stockly/inventory
+npx mfe-forge generate app appname/auth
+npx mfe-forge generate app appname/dashboard
+npx mfe-forge generate app appname/inventory
 ```
 
 Each app:
+
 - Gets an auto-detected port
 - Is registered in the host's `vite.config.ts`
 - Gets a dev script in root `package.json`
@@ -68,15 +70,15 @@ npm install
 bun dev
 
 # Or run specific scope
-bun mfe-forge dev --scope stockly
+bun mfe-forge dev --scope appname
 
 # Or run single app
-bun mfe-forge dev --app stockly/auth
+bun mfe-forge dev --app appname/auth
 ```
 
 ## Step 7: Configure Routes in Host
 
-Open `apps/stockly/host/src/App.tsx` and add routes:
+Open `apps/appname/host/src/App.tsx` and add routes:
 
 ```tsx
 import React, { Suspense } from 'react'
@@ -126,6 +128,7 @@ npx mfe-forge sync
 ```
 
 This updates:
+
 - Host `vite.config.ts` remotes
 - TypeScript declarations
 - Route registrations

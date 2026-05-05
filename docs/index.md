@@ -2,8 +2,8 @@
 layout: home
 
 hero:
-  name: "MFE Forge"
-  text: "Micro Frontend Framework"
+  name: 'MFE Forge'
+  text: 'Micro Frontend Framework'
   tagline: Production-ready MFE architecture for Vite + React + Module Federation
   image:
     src: /logo.svg
@@ -65,10 +65,10 @@ bun dev
 
 ## Runtime Packages
 
-| Package | Description |
-|---------|-------------|
-| `@mfe-forge/core` | Error boundaries, event bus, remote loaders |
-| `@mfe-forge/router` | Cross-MFE routing coordination |
-| `@mfe-forge/store` | Shared Zustand stores with sync |
-| `@mfe-forge/design` | Design tokens and theming |
-| `@mfe-forge/testing` | Testing utilities for MFEs |
+| Package              | Description                                 |
+| -------------------- | ------------------------------------------- |
+| `@mfe-forge/core`    | Error boundaries, event bus, remote loaders |
+| `@mfe-forge/router`  | Cross-MFE routing coordination              |
+| `@mfe-forge/store`   | Shared Zustand stores with sync             |
+| `@mfe-forge/design`  | Design tokens and theming                   |
+| `@mfe-forge/testing` | Testing utilities for MFEs                  |

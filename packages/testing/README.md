@@ -21,6 +21,7 @@ bun add @mfe-forge/testing
 ## Usage
 
 ### Testing a Remote MFE
+
 ```ts
 import { renderMFE } from '@mfe-forge/testing';
 import { MyRemote } from './App';

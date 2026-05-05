@@ -8,11 +8,11 @@ Scopes are top-level directories under `apps/` that group related MFEs. They rep
 
 ```
 apps/
-├── stockly/          # Stockly product team
+├── appname/          # Appname product team
 │   ├── host/         # Shell application
 │   ├── auth/         # Authentication MFE
 │   └── dashboard/    # Dashboard MFE
-└── meridian/         # Meridian product team
+└── secAppname/         # SecAppname product team
     ├── host/
     └── analytics/
 ```
@@ -22,6 +22,7 @@ Each scope has exactly one host that orchestrates its MFEs.
 ### Host Application
 
 The host is the shell application that:
+
 - Loads remote MFEs via Module Federation
 - Provides shared layout and navigation
 - Coordinates routing between MFEs
@@ -30,6 +31,7 @@ The host is the shell application that:
 ### Remote Applications
 
 Remotes are independent MFEs that:
+
 - Expose their root component via `remoteEntry.js`
 - Run on their own dev server port
 - Can be developed and deployed independently
@@ -37,6 +39,7 @@ Remotes are independent MFEs that:
 ### Shared Packages
 
 Packages in `packages/` contain:
+
 - UI components
 - Business logic
 - Utilities
@@ -47,6 +50,7 @@ Packages in `packages/` contain:
 MFE Forge uses `@originjs/vite-plugin-federation` with these conventions:
 
 ### Remote (App)
+
 ```ts
 federation({
   name: 'authApp',
@@ -62,9 +66,10 @@ federation({
 ```
 
 ### Host
+
 ```ts
 federation({
-  name: 'stocklyHostApp',
+  name: 'AppnameHostApp',
   remotes: {
     authApp: 'http://localhost:3001/assets/remoteEntry.js',
     dashboardApp: 'http://localhost:3002/assets/remoteEntry.js',
@@ -86,8 +91,8 @@ Use `@mfe-forge/store` for cross-MFE state:
 import { useGlobalStore } from '@mfe-forge/store'
 
 function Component() {
-  const user = useGlobalStore(state => state.user)
-  const setUser = useGlobalStore(state => state.setUser)
+  const user = useGlobalStore((state) => state.user)
+  const setUser = useGlobalStore((state) => state.setUser)
   // ...
 }
 ```
@@ -101,7 +106,7 @@ import { createScopedStore } from '@mfe-forge/store'
 
 const useAuthStore = createScopedStore('auth', {
   token: null,
-  permissions: []
+  permissions: [],
 })
 ```
 
@@ -131,7 +136,7 @@ unsubscribe()
 For tightly coupled MFEs (same scope):
 
 ```ts
-import { Button } from '@stockly/ui'
+import { Button } from '@appname/ui'
 ```
 
 ### URL-based Communication
@@ -190,10 +195,7 @@ import { MFErrorBoundary, RemoteLoader } from '@mfe-forge/core'
 
 function App() {
   return (
-    <MFErrorBoundary 
-      remoteName="dashboard"
-      fallback={(error) => <CustomError error={error} />}
-    >
+    <MFErrorBoundary remoteName="dashboard" fallback={(error) => <CustomError error={error} />}>
       <RemoteLoader remoteName="dashboardApp" />
     </MFErrorBoundary>
   )
@@ -220,9 +222,7 @@ const prefetchDashboard = () => {
   import('dashboardApp/App')
 }
 
-<button onMouseEnter={prefetchDashboard}>
-  Dashboard
-</button>
+;<button onMouseEnter={prefetchDashboard}>Dashboard</button>
 ```
 
 ## Security
@@ -230,6 +230,7 @@ const prefetchDashboard = () => {
 ### Sandbox Strategy
 
 MFE Forge recommends:
+
 1. Same-origin deployment for same-scope MFEs
 2. CSP headers configured in host
 3. Input validation in each MFE
@@ -237,8 +238,8 @@ MFE Forge recommends:
 
 ### Isolation Levels
 
-| Level | Use Case |
-|-------|----------|
-| Shared runtime | Same team, high trust |
+| Level          | Use Case                 |
+| -------------- | ------------------------ |
+| Shared runtime | Same team, high trust    |
 | Event bus only | Cross-team, medium trust |
-| iframe | Third-party, low trust |
+| iframe         | Third-party, low trust   |

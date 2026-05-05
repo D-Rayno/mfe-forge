@@ -88,7 +88,7 @@ function ProductCard({ product }) {
   const addToCart = () => {
     globalEventBus.emit('cart:addItem', {
       productId: product.id,
-      quantity: 1
+      quantity: 1,
     })
   }
 
@@ -113,7 +113,7 @@ function CartApp() {
 
   useEffect(() => {
     return globalEventBus.on('cart:addItem', ({ productId, quantity }) => {
-      setItems(prev => [...prev, { productId, quantity }])
+      setItems((prev) => [...prev, { productId, quantity }])
     })
   }, [])
 

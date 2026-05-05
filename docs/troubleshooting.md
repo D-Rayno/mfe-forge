@@ -9,6 +9,7 @@ Error: Port 3001 is already in use
 ```
 
 **Solution:**
+
 ```bash
 # Find and kill process
 lsof -ti:3001 | xargs kill -9
@@ -24,6 +25,7 @@ Error: Cannot find module 'authApp/App'
 ```
 
 **Solution:**
+
 ```bash
 # Sync host configuration
 mfe-forge sync
@@ -39,6 +41,7 @@ Cannot find module 'remoteApp/App' or its corresponding type declarations
 ```
 
 **Solution:**
+
 ```bash
 # Regenerate declarations
 mfe-forge sync --types
@@ -91,6 +94,7 @@ Error: Could not resolve entry module "src/bootstrap.tsx"
 ```
 
 **Solution:**
+
 ```bash
 # Check file exists
 ls apps/scope/app/src/bootstrap.tsx
@@ -116,6 +120,7 @@ const bus = new EventBus()
 ### Hot Reload Not Working
 
 **Solution:**
+
 ```bash
 # Use build --watch mode
 mfe-forge dev --build-watch

@@ -39,6 +39,7 @@ npm run dev
 ## Installation
 
 ### Global Installation
+
 ```bash
 npm install -g mfe-forge
 # or
@@ -48,6 +49,7 @@ bun add -g mfe-forge
 ```
 
 ### Project-local Installation
+
 ```bash
 npm install --save-dev mfe-forge
 # or
@@ -58,16 +60,16 @@ bun add -D mfe-forge
 
 ## CLI Commands
 
-| Command | Alias | Description |
-|---------|-------|-------------|
-| `init [name]` | — | Initialize a new MFE Forge project |
-| `generate <type> [name]` | `g` | Generate apps, hosts, packages, or libraries |
-| `dev` | — | Start development servers |
-| `build [app]` | — | Build applications for production |
-| `test` | — | Run tests across MFEs |
-| `sync` | — | Sync types, hosts, and routes |
-| `doctor` | — | Diagnose common issues |
-| `config` | — | Manage configuration |
+| Command                  | Alias | Description                                  |
+| ------------------------ | ----- | -------------------------------------------- |
+| `init [name]`            | —     | Initialize a new MFE Forge project           |
+| `generate <type> [name]` | `g`   | Generate apps, hosts, packages, or libraries |
+| `dev`                    | —     | Start development servers                    |
+| `build [app]`            | —     | Build applications for production            |
+| `test`                   | —     | Run tests across MFEs                        |
+| `sync`                   | —     | Sync types, hosts, and routes                |
+| `doctor`                 | —     | Diagnose common issues                       |
+| `config`                 | —     | Manage configuration                         |
 
 ## Project Structure
 
@@ -100,12 +102,14 @@ my-project/
 
 ## Documentation
 
-- [Getting Started](docs/getting-started.md)
-- [CLI Reference](docs/cli.md)
-- [Architecture Guide](docs/architecture.md)
-- [Migration Guide](docs/migration.md)
-- [Publishing Guide](docs/publishing.md)
+📖 Full documentation: [https://d-rayno.github.io/mfe-forge/](https://d-rayno.github.io/mfe-forge/)
+
+- [Getting Started](https://d-rayno.github.io/mfe-forge/getting-started)
+- [CLI Reference](https://d-rayno.github.io/mfe-forge/cli)
+- [Architecture Guide](https://d-rayno.github.io/mfe-forge/architecture)
+- [Migration Guide](https://d-rayno.github.io/mfe-forge/migration)
+- [Publishing Guide](https://d-rayno.github.io/mfe-forge/publishing)
 
 ## License
 
-MIT © [Your Organization]
+MIT © [D-Rayno](https://github.com/D-Rayno)

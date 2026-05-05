@@ -1,7 +1,7 @@
-import { Command } from 'commander';
-import chalk from 'chalk';
-import { execa } from 'execa';
-import { getProjectContext } from '../utils/config.js';
+import { Command } from 'commander'
+import chalk from 'chalk'
+import { execa } from 'execa'
+import { getProjectContext } from '../utils/config.js'
 
 export const testCommand = new Command('test')
   .description('Run tests across MFEs')
@@ -11,32 +11,32 @@ export const testCommand = new Command('test')
   .option('-w, --watch', 'Watch mode')
   .argument('[app]', 'Specific app to test')
   .action(async (app, options) => {
-    const context = getProjectContext();
-    const pm = context.config.defaults.packageManager;
+    const context = getProjectContext()
+    const pm = context.config.defaults.packageManager
 
     try {
-      const args: string[] = [];
+      const args: string[] = []
 
-      if (options.unit) args.push('--unit');
-      if (options.e2e) args.push('--e2e');
-      if (options.coverage) args.push('--coverage');
-      if (options.watch) args.push('--watch');
+      if (options.unit) args.push('--unit')
+      if (options.e2e) args.push('--e2e')
+      if (options.coverage) args.push('--coverage')
+      if (options.watch) args.push('--watch')
 
       if (app) {
-        const appDir = `${context.rootDir}/apps/${app}`;
-        await execa(pm, ['run', 'test', ...args], { 
+        const appDir = `${context.rootDir}/apps/${app}`
+        await execa(pm, ['run', 'test', ...args], {
           cwd: appDir,
-          stdio: 'inherit'
-        });
+          stdio: 'inherit',
+        })
       } else {
         // Run all tests via turbo
-        await execa(pm, ['run', 'test', ...args], { 
+        await execa(pm, ['run', 'test', ...args], {
           cwd: context.rootDir,
-          stdio: 'inherit'
-        });
+          stdio: 'inherit',
+        })
       }
     } catch (error: any) {
-      console.error(chalk.red('Tests failed'));
-      process.exit(1);
+      console.error(chalk.red('Tests failed'))
+      process.exit(1)
     }
-  });
+  })

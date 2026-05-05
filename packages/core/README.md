@@ -22,25 +22,27 @@ bun add @mfe-forge/core
 ## Usage
 
 ### Error Boundary
-```tsx
-import { MFErrorBoundary } from '@mfe-forge/core';
 
-<MFErrorBoundary fallback={<div>Failed to load</div>}>
+```tsx
+import { MFErrorBoundary } from '@mfe-forge/core'
+
+;<MFErrorBoundary fallback={<div>Failed to load</div>}>
   <RemoteApp />
 </MFErrorBoundary>
 ```
 
 ### Event Bus
+
 ```ts
-import { eventBus } from '@mfe-forge/core';
+import { eventBus } from '@mfe-forge/core'
 
 // Subscribe
 eventBus.on('user_logged_in', (data) => {
-  console.log('User logged in:', data);
-});
+  console.log('User logged in:', data)
+})
 
 // Publish
-eventBus.emit('user_logged_in', { id: '123' });
+eventBus.emit('user_logged_in', { id: '123' })
 ```
 
 ## License

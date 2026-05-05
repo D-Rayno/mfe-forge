@@ -14,59 +14,62 @@ export default {
     language: 'typescript',
     styling: 'tailwind',
     stateManagement: 'zustand',
-    packageManager: 'bun'
+    packageManager: 'bun',
   },
 
   federation: {
     plugin: '@originjs/vite-plugin-federation',
-    shared: ['react', 'react-dom', 'react-router-dom', 'zustand']
+    shared: ['react', 'react-dom', 'react-router-dom', 'zustand'],
   },
 
   dev: {
     autoStartHost: true,
     parallelLimit: 10,
     portRange: [3000, 3999],
-    cors: true
+    cors: true,
   },
 
   build: {
     target: 'esnext',
     minify: false,
     cssCodeSplit: false,
-    sourcemap: true
+    sourcemap: true,
   },
 
   testing: {
     unit: 'vitest',
     e2e: 'playwright',
-    coverage: true
+    coverage: true,
   },
 
   designSystem: {
     enabled: true,
     tokens: true,
-    storybook: true
+    storybook: true,
   },
 
   ci: {
     provider: 'github',
     docker: true,
-    deployTarget: 'vercel'
-  }
+    deployTarget: 'vercel',
+  },
 }
 ```
 
 ## Configuration Options
 
 ### `name`
+
 - **Type**: `string`
 - **Description**: Project name
 
 ### `organization`
+
 - **Type**: `string` (optional)
 - **Description**: NPM organization scope (e.g., `@acme`)
 
 ### `defaults`
+
 - **Type**: `object`
 - **Properties**:
   - `framework`: `'react' | 'vue' | 'svelte'`
@@ -76,6 +79,7 @@ export default {
   - `packageManager`: `'bun' | 'pnpm' | 'npm'`
 
 ### `federation`
+
 - **Type**: `object`
 - **Properties**:
   - `plugin`: Module federation plugin to use
@@ -83,6 +87,7 @@ export default {
   - `runtimePlugin`: Custom runtime plugin path
 
 ### `dev`
+
 - **Type**: `object`
 - **Properties**:
   - `autoStartHost`: Automatically start host with apps
@@ -91,6 +96,7 @@ export default {
   - `cors`: Enable CORS in dev server
 
 ### `build`
+
 - **Type**: `object`
 - **Properties**:
   - `target`: Build target
@@ -99,6 +105,7 @@ export default {
   - `sourcemap`: Generate source maps
 
 ### `testing`
+
 - **Type**: `object`
 - **Properties**:
   - `unit`: Unit testing framework
@@ -106,6 +113,7 @@ export default {
   - `coverage`: Generate coverage reports
 
 ### `designSystem`
+
 - **Type**: `object`
 - **Properties**:
   - `enabled`: Enable design system
@@ -113,6 +121,7 @@ export default {
   - `storybook`: Include Storybook
 
 ### `ci`
+
 - **Type**: `object`
 - **Properties**:
   - `provider`: CI provider

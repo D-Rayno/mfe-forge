@@ -5,11 +5,13 @@
 ### From Manual Vite + Module Federation
 
 1. **Initialize MFE Forge in your project root:**
+
    ```bash
    npx mfe-forge init --skip-install
    ```
 
 2. **Move existing apps to `apps/` directory:**
+
    ```
    apps/
    ├── your-scope/
@@ -19,6 +21,7 @@
    ```
 
 3. **Update vite.config.ts files:**
+
    ```ts
    // Add shared dependencies via MFE Forge conventions
    shared: {
@@ -58,6 +61,7 @@
    MFE Forge uses native Module Federation instead of single-spa.
 
 2. **Update root component exports:**
+
    ```tsx
    // Export for Module Federation
    export default function App() { ... }
@@ -87,10 +91,10 @@ export default {
   defaults: {
     framework: 'react',
     styling: 'tailwind',
-    packageManager: 'pnpm'
+    packageManager: 'pnpm',
   },
   federation: {
-    shared: ['react', 'react-dom', 'react-router-dom', 'zustand']
-  }
+    shared: ['react', 'react-dom', 'react-router-dom', 'zustand'],
+  },
 }
 ```

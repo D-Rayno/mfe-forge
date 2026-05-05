@@ -8,18 +8,18 @@ export default [
   {
     files: ['**/*.{ts,tsx}'],
     plugins: {
-      react
+      react,
     },
     languageOptions: {
       parserOptions: {
         ecmaFeatures: {
-          jsx: true
-        }
-      }
+          jsx: true,
+        },
+      },
     },
     rules: {
       'react/react-in-jsx-scope': 'off',
-      '@typescript-eslint/no-explicit-any': 'warn'
-    }
-  }
+      '@typescript-eslint/no-explicit-any': 'warn',
+    },
+  },
 ]

@@ -90,7 +90,7 @@ mfe-forge test --coverage
 mfe-forge test --watch
 
 # Specific app
-mfe-forge test stockly/dashboard
+mfe-forge test appname/dashboard
 ```
 
 ## Mocking Remote Modules

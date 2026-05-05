@@ -30,5 +30,14 @@
   "publishConfig": {
     "access": "public"
   },
+  "homepage": "https://d-rayno.github.io/mfe-forge/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/D-Rayno/mfe-forge.git",
+    "directory": "packages/design"
+  },
+  "bugs": {
+    "url": "https://github.com/D-Rayno/mfe-forge/issues"
+  },
   "license": "MIT"
 }

@@ -41,7 +41,7 @@ Build Docker images for each MFE:
 
 ```bash
 # Generate Dockerfiles
-mfe-forge generate docker --scope stockly
+mfe-forge generate docker --scope appname
 
 # Build images
 docker-compose build
@@ -59,8 +59,8 @@ For static hosting (Vercel, Netlify, AWS S3):
 mfe-forge build
 
 # Each app's dist folder can be deployed independently
-# apps/stockly/auth/dist -> auth.yourdomain.com
-# apps/stockly/dashboard/dist -> dashboard.yourdomain.com
+# apps/appname/auth/dist -> auth.yourdomain.com
+# apps/appname/dashboard/dist -> dashboard.yourdomain.com
 ```
 
 ### CDN Deployment
@@ -73,7 +73,7 @@ federation({
   remotes: {
     authApp: 'https://cdn.yourdomain.com/auth/assets/remoteEntry.js',
     dashboardApp: 'https://cdn.yourdomain.com/dashboard/assets/remoteEntry.js',
-  }
+  },
 })
 ```
 
@@ -104,13 +104,13 @@ MFE Forge generates GitHub Actions workflows for:
 
 ```bash
 # Build specific scope
-mfe-forge build --scope stockly
+mfe-forge build --scope appname
 
 # Deploy to staging
-mfe-forge deploy --scope stockly --env staging
+mfe-forge deploy --scope appname --env staging
 
 # Deploy to production
-mfe-forge deploy --scope stockly --env production
+mfe-forge deploy --scope appname --env production
 ```
 
 ## Registry Configuration
@@ -121,7 +121,7 @@ For private registries, configure `mfeforge.config.ts`:
 export default {
   registry: {
     url: 'https://npm.yourcompany.com',
-    auth: process.env.NPM_AUTH_TOKEN
-  }
+    auth: process.env.NPM_AUTH_TOKEN,
+  },
 }
 ```

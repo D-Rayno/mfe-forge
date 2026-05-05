@@ -7,3 +7,11 @@ bun.lockb
 .env
 .env.*
 !.env.example
+
+# Turborepo
+.turbo
+.npmrc
+
+# VitePress
+docs/.vitepress/dist
+docs/.vitepress/cache

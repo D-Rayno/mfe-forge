@@ -21,18 +21,20 @@ bun add @mfe-forge/design
 ## Usage
 
 ### Applying Tokens
+
 ```ts
-import { applyTokens } from '@mfe-forge/design';
+import { applyTokens } from '@mfe-forge/design'
 
 // Apply tokens to document root
-applyTokens(document.documentElement);
+applyTokens(document.documentElement)
 ```
 
 ### Accessing Tokens
-```ts
-import { tokens } from '@mfe-forge/design';
 
-console.log(tokens.colors.primary);
+```ts
+import { tokens } from '@mfe-forge/design'
+
+console.log(tokens.colors.primary)
 ```
 
 ## License

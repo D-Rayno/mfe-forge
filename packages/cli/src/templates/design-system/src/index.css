@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   --color-background: oklch(0.145 0 0);
@@ -14,5 +14,5 @@
   --color-destructive: oklch(0.577 0.245 27.33);
   --color-ring: oklch(0.556 0 0);
   --radius: 0.5rem;
-  --font-sans: "Inter", system-ui, sans-serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
 }
