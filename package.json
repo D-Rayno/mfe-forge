@@ -1,8 +1,8 @@
 {
   "name": "mfe-forge-monorepo",
-  "version": "1.0.0",
-  "description": "Production-ready Micro Frontend framework for Vite + React + Module Federation",
+  "version": "8.0.2",
   "private": true,
+  "description": "Production-ready Micro Frontend framework for Vite + React + Module Federation",
   "type": "module",
   "workspaces": [
     "packages/*",

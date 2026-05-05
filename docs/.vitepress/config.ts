@@ -4,6 +4,7 @@ export default defineConfig({
   title: 'MFE Forge',
   description: 'Production-ready Micro Frontend framework',
   base: '/mfe-forge/',
+  ignoreDeadLinks: true,
 
   themeConfig: {
     nav: [

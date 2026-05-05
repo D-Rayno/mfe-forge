@@ -1,5 +1,11 @@
 # @mfe-forge/router
 
+## 5.0.1
+
+### Patch Changes
+
+- fix: template rendering errors, build configs, and update CLI documentation
+
 ## 5.0.0
 
 ### Major Changes

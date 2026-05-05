@@ -135,6 +135,6 @@ This updates:
 
 ## Next Steps
 
-- [Configure CI/CD](ci-cd.md)
-- [Set up testing](testing.md)
-- [Learn about design systems](design-system.md)
+- [Learn how to Publish](./publishing.md)
+- [Set up testing](./testing.md)
+- [Learn about design systems](./design-system.md)

@@ -1,6 +1,6 @@
 {
   "name": "@mfe-forge/core",
-  "version": "5.0.0",
+  "version": "8.0.2",
   "description": "Core runtime utilities for MFE Forge applications",
   "type": "module",
   "main": "./dist/index.js",
@@ -36,11 +36,11 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@types/node": "^20.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "tsup": "^8.0.0",
-    "typescript": "~5.8.3",
-    "@types/node": "^20.0.0"
+    "typescript": "~5.8.3"
   },
   "publishConfig": {
     "access": "public"
