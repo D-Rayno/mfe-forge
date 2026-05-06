@@ -14,7 +14,7 @@
     },
     "packages/cli": {
       "name": "mfe-forge",
-      "version": "1.0.0",
+      "version": "8.0.7",
       "bin": {
         "mfe-forge": "./dist/bin/index.js",
         "mfe": "./dist/bin/index.js",
@@ -34,6 +34,7 @@
         "ora": "^8.0.0",
         "portfinder": "^1.0.32",
         "semver": "^7.6.0",
+        "typescript": "~5.8.3",
         "yaml": "^2.4.0",
         "zod": "^3.22.0",
       },
@@ -43,12 +44,11 @@
         "@types/mustache": "^4.2.5",
         "@types/semver": "^7.5.8",
         "tsup": "^8.0.0",
-        "typescript": "~5.8.3",
       },
     },
     "packages/core": {
       "name": "@mfe-forge/core",
-      "version": "1.0.0",
+      "version": "8.0.7",
       "devDependencies": {
         "@types/node": "^20.0.0",
         "@types/react": "^19.0.0",
@@ -63,7 +63,7 @@
     },
     "packages/design": {
       "name": "@mfe-forge/design",
-      "version": "1.0.0",
+      "version": "8.0.7",
       "devDependencies": {
         "tsup": "^8.0.0",
         "typescript": "~5.8.3",
@@ -71,7 +71,7 @@
     },
     "packages/router": {
       "name": "@mfe-forge/router",
-      "version": "1.0.0",
+      "version": "8.0.7",
       "devDependencies": {
         "@types/react": "^19.0.0",
         "tsup": "^8.0.0",
@@ -85,7 +85,7 @@
     },
     "packages/store": {
       "name": "@mfe-forge/store",
-      "version": "1.0.0",
+      "version": "8.0.7",
       "devDependencies": {
         "tsup": "^8.0.0",
         "typescript": "~5.8.3",
@@ -95,9 +95,17 @@
         "zustand": "^5.0.0",
       },
     },
+    "packages/test-pkg": {
+      "name": "default-test-pkg",
+      "version": "1.0.0",
+      "devDependencies": {
+        "typescript": "~5.8.3",
+        "vitest": "^1.5.0",
+      },
+    },
     "packages/testing": {
       "name": "@mfe-forge/testing",
-      "version": "1.0.0",
+      "version": "8.0.7",
       "devDependencies": {
         "@types/react": "^19.0.0",
         "tsup": "^8.0.0",
@@ -107,6 +115,7 @@
       "peerDependencies": {
         "@testing-library/react": "^16.0.0",
         "react": "^19.0.0",
+        "vitest": "^1.5.0",
       },
     },
   },
@@ -562,6 +571,8 @@
     "default-browser": ["default-browser@5.5.0", "", { "dependencies": { "bundle-name": "^4.1.0", "default-browser-id": "^5.0.0" } }, "sha512-H9LMLr5zwIbSxrmvikGuI/5KGhZ8E2zH3stkMgM5LpOWDutGM2JZaj460Udnf1a+946zc7YBgrqEWwbk7zHvGw=="],
 
     "default-browser-id": ["default-browser-id@5.0.1", "", {}, "sha512-x1VCxdX4t+8wVfd1so/9w+vQ4vx7lKd2Qp5tDRutErwmR85OgmfX7RlLRMWafRMY7hbEiXIbudNrjOAPa/hL8Q=="],
+
+    "default-test-pkg": ["default-test-pkg@workspace:packages/test-pkg"],
 
     "defaults": ["defaults@1.0.4", "", { "dependencies": { "clone": "^1.0.2" } }, "sha512-eFuaLoy/Rxalv2kr+lqMlUnrDWV+3j4pljOIJgLIhI058IQfWJ7vXhyEIHu+HtC738klGALYxOKDO0bQP3tg8A=="],
 

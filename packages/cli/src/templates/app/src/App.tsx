@@ -3,7 +3,7 @@ import { MFErrorBoundary } from '@mfe-forge/core'
 
 export default function {{pascalName}}App() {
   return (
-    <MFErrorBoundary remoteName="{{fullName}}">
+    <MFErrorBoundary remoteName="{{{fullName}}}">
       <Routes>
         <Route
           path="/"
@@ -20,7 +20,7 @@ export default function {{pascalName}}App() {
             </div>
           }
         />
-        <Route path="*" element={<Navigate to="/{{fullName}}" replace />} />
+        <Route path="*" element={<Navigate to="/{{{fullName}}}" replace />} />
       </Routes>
     </MFErrorBoundary>
   )

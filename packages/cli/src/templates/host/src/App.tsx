@@ -27,7 +27,7 @@ export default function App() {
                 path="/dashboard"
                 element={
                   <div className="p-8 text-center text-xl">
-                    <h1 className="text-3xl font-bold mb-4">{{ pascalName }} Host</h1>
+                    <h1 className="text-3xl font-bold mb-4">{{ pascalName }}</h1>
                     <p className="text-muted-foreground">Add your remote routes here</p>
                   </div>
                 }

@@ -17,10 +17,29 @@ export async function findAvailablePort(
   preferredPort?: number
 ): Promise<number> {
   const [start, end] = context.config.dev.portRange
-  portfinder.setBasePort(preferredPort || start)
-  portfinder.setHighestPort(end)
-
-  return portfinder.getPortPromise()
+  const usedPorts = getUsedPorts(context.appsDir)
+  
+  let currentPort = preferredPort || start
+  
+  while (currentPort <= end) {
+    if (!usedPorts.has(currentPort)) {
+      try {
+        portfinder.setBasePort(currentPort)
+        portfinder.setHighestPort(end)
+        const port = await portfinder.getPortPromise()
+        if (!usedPorts.has(port)) {
+          return port
+        }
+        currentPort = port + 1
+      } catch (e) {
+        break
+      }
+    } else {
+      currentPort++
+    }
+  }
+  
+  throw new Error('No available ports found in the configured range')
 }
 
 /**

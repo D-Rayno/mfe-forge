@@ -41,14 +41,14 @@ export const syncCommand = new Command('sync')
             let content = await fs.readFile(vitePath, 'utf-8')
 
             // Rebuild remotes block
-            let remotesBlock = '      remotes: {\n'
+            let remotesBlock = 'remotes: {\n'
             for (const app of scopeApps) {
               remotesBlock += `        ${app.camelName}: "http://localhost:${app.port}/assets/remoteEntry.js",\n`
             }
             remotesBlock += '      },'
 
-            // Replace existing remotes block
-            content = content.replace(/remotes:\s*\{[^}]*\}/s, remotesBlock)
+            // Replace existing remotes block (including optional trailing comma)
+            content = content.replace(/remotes:\s*\{[^}]*\}(,)?/s, remotesBlock)
             await fs.writeFile(vitePath, content)
           }
 

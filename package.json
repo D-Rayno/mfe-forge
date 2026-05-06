@@ -19,7 +19,10 @@
     "release": "changeset publish",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs"
+    "docs:preview": "vitepress preview docs",
+    "dev:test-scope:test-app": "bun --filter test-scope-test-app dev",
+    "dev:test-scope:host": "bun --filter test-scope-host dev",
+    "dev:default:test-pkg": "bun --filter default-test-pkg dev"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.1",

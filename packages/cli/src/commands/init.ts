@@ -146,6 +146,7 @@ export const initCommand = new Command('init')
           lib: ['ES2022', 'DOM', 'DOM.Iterable'],
           module: 'ESNext',
           moduleResolution: 'bundler',
+          jsx: 'react-jsx',
           resolveJsonModule: true,
           allowJs: false,
           checkJs: false,

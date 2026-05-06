@@ -85,15 +85,15 @@ export const generateCommand = new Command('generate')
         name: appName,
         scope,
         fullName,
-        pascalName: toPascalCase(appName),
-        camelName: toCamelCase(appName),
+        pascalName: toPascalCase(fullName),
+        camelName: toCamelCase(fullName),
         packageName: getPackageName(fullName.replace(/\//g, '-'), context.config.organization),
         port,
         host: options.host || `${scope}/host`,
         organization: context.config.organization || 'mfe-forge',
         features: options.features ? options.features.split(',') : [],
         hasScope,
-        depth: hasScope ? '../../..' : '../../..',
+        depth: (type === 'package' || type === 'library') ? '../..' : (hasScope ? '../../..' : '../..'),
         mfeForgeVersion: pkg.version,
       }
 
@@ -138,11 +138,10 @@ async function postGenerateApp(context: any, vars: any, targetDir: string, optio
   if (!options.skipHost && host) {
     const hostDir = path.join(context.appsDir, host)
     if (!(await fs.pathExists(hostDir))) {
-      console.log(chalk.yellow(`Host "${host}" not found. Generating...`))
-      await fs.ensureDir(hostDir)
+      console.log(chalk.yellow(`Host "${host}" not found. Run "mfe-forge generate host ${host}" to create it.`))
+    } else {
+      await registerInHost(context, fullName, camelName, port, host)
     }
-
-    await registerInHost(context, fullName, camelName, port, host)
   }
 }
 
@@ -166,8 +165,8 @@ async function postGenerateHost(context: any, vars: any, targetDir: string) {
     const content = await fs.readFile(viteConfigPath, 'utf-8')
     if (content.includes('remotes: {')) {
       const newContent = content.replace(
-        /remotes:\s*\{[^}]*\}/s,
-        `remotes: {\n${remotesConfig}      }`
+        /remotes:\s*\{[^}]*\}(,)?/s,
+        `remotes: {\n${remotesConfig}      },`
       )
       await fs.writeFile(viteConfigPath, newContent)
     }
