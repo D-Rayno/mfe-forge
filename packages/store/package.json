@@ -1,6 +1,6 @@
 {
   "name": "@mfe-forge/store",
-  "version": "8.0.7",
+  "version": "8.1.0",
   "description": "Shared state management for MFE Forge",
   "type": "module",
   "main": "./dist/index.js",
