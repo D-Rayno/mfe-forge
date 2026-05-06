@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "resolveJsonModule": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "outDir": "./dist",
+    "noEmit": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "strict": {{#strictTs}}true{{/strictTs}}{{^strictTs}}false{{/strictTs}},
+    "noUnusedLocals": {{#strictTs}}true{{/strictTs}}{{^strictTs}}false{{/strictTs}},
+    "noUnusedParameters": {{#strictTs}}true{{/strictTs}}{{^strictTs}}false{{/strictTs}},
+    "forceConsistentCasingInFileNames": true
+  }
+}

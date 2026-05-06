@@ -29,6 +29,7 @@ export const generateCommand = new Command('generate')
   .option('--scope <scope>', 'Scope/team for the app')
   .option('--features <features>', 'Comma-separated features', '')
   .option('--skip-host', 'Skip host auto-generation')
+  .option('--dry-run', 'Preview what would be generated without writing files')
   .action(async (type, name, options) => {
     const spinner = ora()
     const context = getProjectContext()
@@ -61,11 +62,40 @@ export const generateCommand = new Command('generate')
       const appName = hasScope ? cleanName.split('/')[1] : cleanName
       const fullName = hasScope ? cleanName : `${scope}/${cleanName}`
 
+      // Validate scope/name format for apps and hosts
+      if ((type === 'app' || type === 'host') && !cleanName.includes('/')) {
+        console.error(chalk.red(
+          `Apps and hosts must be scoped: "${cleanName}" → try "${cleanName}-scope/${cleanName}"`
+        ))
+        process.exit(1)
+      }
+
       let targetDir: string
       if (type === 'package' || type === 'library') {
         targetDir = path.join(context.packagesDir, cleanName.replace(/\//g, '-'))
       } else {
         targetDir = path.join(context.appsDir, fullName)
+      }
+
+      // Dry run mode: list what would be generated without writing
+      if (options.dryRun) {
+        console.log(chalk.cyan('\n📋 Dry run — files that would be generated:'))
+        console.log(`  ${targetDir}/`)
+        const templateName = type === 'design-system' ? 'design-system' : type
+        const templateDir = path.resolve(path.dirname(new URL(import.meta.url).pathname), '../../src/templates', templateName)
+        if (await fs.pathExists(templateDir)) {
+          const files = await fs.readdir(templateDir, { recursive: true })
+          for (const f of files) {
+            const filePath = typeof f === 'string' ? f : f.toString()
+            const srcPath = path.join(templateDir, filePath)
+            const stat = await fs.stat(srcPath)
+            if (!stat.isDirectory()) {
+              const outputFile = filePath.endsWith('.mustache') ? filePath.replace(/\.mustache$/, '') : filePath
+              console.log(`    ${outputFile}`)
+            }
+          }
+        }
+        return
       }
 
       if (await fs.pathExists(targetDir)) {
@@ -93,12 +123,21 @@ export const generateCommand = new Command('generate')
         organization: context.config.organization || 'mfe-forge',
         features: options.features ? options.features.split(',') : [],
         hasScope,
-        depth: (type === 'package' || type === 'library') ? '../..' : (hasScope ? '../../..' : '../..'),
+        depth: (type === 'package' || type === 'library')
+          ? '../..'        // packages/name → root is 2 up
+          : '../../..',    // apps/scope/name → root is always 3 up (scope is mandatory)
         mfeForgeVersion: pkg.version,
+        useWorkspace: await fs.pathExists(path.join(context.rootDir, 'packages/core')),
       }
 
       const templateName = type === 'design-system' ? 'design-system' : type
-      await copyTemplate(templateName, targetDir, vars)
+      try {
+        await copyTemplate(templateName, targetDir, vars)
+      } catch (err: any) {
+        spinner.fail(`Template error: ${err.message}`)
+        await fs.remove(targetDir) // clean up partial output
+        process.exit(1)
+      }
 
       if (type === 'app') {
         await postGenerateApp(context, vars, targetDir, options)
@@ -158,8 +197,8 @@ async function postGenerateHost(context: any, vars: any, targetDir: string) {
     let declarations = '// Auto-generated remote declarations\n'
 
     for (const app of apps) {
-      remotesConfig += `        ${app.camelName}: "http://localhost:${app.port}/assets/remoteEntry.js",\n`
-      declarations += `declare module '${app.camelName}/App' {\n  import React from 'react'\n  const App: React.ComponentType<any>\n  export default App\n}\n\n`
+      remotesConfig += `        ${app.federationName}: "http://localhost:${app.port}/assets/remoteEntry.js",\n`
+      declarations += `declare module '${app.federationName}/App' {\n  import React from 'react'\n  const App: React.ComponentType<any>\n  export default App\n}\n\n`
     }
 
     const content = await fs.readFile(viteConfigPath, 'utf-8')

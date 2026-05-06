@@ -129,6 +129,12 @@ mfe-forge dev --build-watch
 mfe-forge dev --app scope/app
 ```
 
+### Remote name registered as `fooBarAppApp`
+
+This was a bug in MFE Forge < 8.1.0 where `discoverApps` appended the `App`
+suffix twice. After upgrading, run `mfe-forge sync --hosts` to regenerate
+correct federation keys in your host `vite.config.ts`.
+
 ## Diagnostic Commands
 
 ```bash

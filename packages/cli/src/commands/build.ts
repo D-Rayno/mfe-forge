@@ -22,8 +22,15 @@ export const buildCommand = new Command('build')
       const allApps = discoverApps(context)
       let targets: string[] = []
 
+      // Normalize bare app names to scope/name format
+      const normalizeAppName = (name: string) => {
+        if (name.includes('/')) return name
+        const match = allApps.find(a => a.name.endsWith(`/${name}`))
+        return match?.name ?? name
+      }
+
       if (app) {
-        targets = [app]
+        targets = [normalizeAppName(app)]
       } else if (options.scope) {
         targets = allApps.filter((a) => a.scope === options.scope).map((a) => a.name)
       } else {

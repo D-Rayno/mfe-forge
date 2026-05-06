@@ -43,7 +43,7 @@ export const syncCommand = new Command('sync')
             // Rebuild remotes block
             let remotesBlock = 'remotes: {\n'
             for (const app of scopeApps) {
-              remotesBlock += `        ${app.camelName}: "http://localhost:${app.port}/assets/remoteEntry.js",\n`
+              remotesBlock += `        ${app.federationName}: "http://localhost:${app.port}/assets/remoteEntry.js",\n`
             }
             remotesBlock += '      },'
 
@@ -56,7 +56,7 @@ export const syncCommand = new Command('sync')
           const declPath = path.join(hostDir, 'src/remotes/declarations.d.ts')
           let declContent = '// Auto-generated remote declarations\n'
           for (const app of scopeApps) {
-            declContent += `\ndeclare module '${app.camelName}/App' {\n  import React from 'react'\n  const App: React.ComponentType<any>\n  export default App\n}\n`
+            declContent += `\ndeclare module '${app.federationName}/App' {\n  import React from 'react'\n  const App: React.ComponentType<any>\n  export default App\n}\n`
           }
           await fs.writeFile(declPath, declContent)
         }

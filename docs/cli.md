@@ -39,31 +39,35 @@ Generate applications, hosts, or packages.
 
 ### Options
 
-| Option                  | Description                  |
-| ----------------------- | ---------------------------- |
-| `--port <port>`         | Development server port      |
-| `--host <host>`         | Target host for registration |
-| `--scope <scope>`       | Scope/team for the app       |
-| `--features <features>` | Comma-separated features     |
-| `--skip-host`           | Skip host auto-generation    |
+| Option                  | Description                                     |
+| ----------------------- | ----------------------------------------------- |
+| `--port <port>`         | Development server port                         |
+| `--host <host>`         | Target host for registration                    |
+| `--scope <scope>`       | Scope/team for the app                          |
+| `--features <features>` | Comma-separated features                        |
+| `--skip-host`           | Skip host auto-generation                       |
+| `--dry-run`             | Preview generated files without writing to disk |
 
 ### Examples
 
-```bash
-# Simple app
-mfe-forge generate app dashboard
+> **Note:** Apps and hosts **must** use `scope/name` format (e.g., `platform/auth`).
+> Inside a monorepo containing MFE Forge packages, runtime dependencies are linked as `workspace:*`.
 
-# Scoped app (creates apps/appname/auth)
-mfe-forge generate app appname/auth
+```bash
+# Scoped app (required format)
+mfe-forge generate app platform/auth
 
 # With explicit port
-mfe-forge generate app appname/auth --port 3005
+mfe-forge generate app platform/auth --port 3005
 
 # Override host
-mfe-forge generate app marketing/landing --host appname/host
+mfe-forge generate app marketing/landing --host platform/host
 
-# Package
+# Package (no scope required)
 mfe-forge generate package ui
+
+# Preview without writing
+mfe-forge generate app platform/dashboard --dry-run
 ```
 
 ## `mfe-forge dev`

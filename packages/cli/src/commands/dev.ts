@@ -64,25 +64,19 @@ export const devCommand = new Command('dev')
         const [cmd, ...args] = commands[0].split(' ')
         await execa(cmd, args, { stdio: 'inherit', cwd: context.rootDir })
       } else {
-        // Use concurrently if available, otherwise run hosts first then apps
-        const concurrentlyCmd = `${pm} exec concurrently \"${commands.join('\" \"')}\" --names \"${targets.join(',')}\" --prefix-colors \"auto\"`
-
+        // Use concurrently for parallel execution
         try {
           await execa(
             'npx',
             [
+              '--yes',
               'concurrently',
-              ...commands.map((c) => c.split(' ')).flat(),
-              '--names',
-              targets.join(','),
-              '--prefix-colors',
-              'auto',
+              '--kill-others-on-fail',
+              '--names', targets.join(','),
+              '--prefix-colors', 'auto',
+              ...commands,          // each command is ONE string element, not split
             ],
-            {
-              stdio: 'inherit',
-              cwd: context.rootDir,
-              shell: true,
-            }
+            { stdio: 'inherit', cwd: context.rootDir }
           )
         } catch {
           // Fallback: run sequentially with info

@@ -76,10 +76,8 @@ export function getUsedPorts(appsDir: string): Set<number> {
           if (match) used.add(parseInt(match[1]))
         }
 
-        // Recurse if it might be a scope directory (no vite.config.ts)
-        if (entry.isDirectory() && !fs.existsSync(viteConfig)) {
-          scanDir(fullPath)
-        }
+        // Always recurse into subdirectories to find nested apps
+        scanDir(fullPath)
       }
     }
   }

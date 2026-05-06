@@ -51,8 +51,9 @@ export function discoverApps(context: ProjectContext): RemoteApp[] {
           scope: scopeName,
           port,
           url: `http://localhost:${port}/assets/remoteEntry.js`,
-          camelName: `${camelName}App`,
-          pascalName: `${pascalName}App`,
+          camelName,
+          pascalName,
+          federationName: `${camelName}App`,
           packageName: getPackageName(fullName.replace(/\//g, '-'), config.organization),
           entry: `./src/bootstrap.tsx`,
         })

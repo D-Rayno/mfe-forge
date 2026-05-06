@@ -76,6 +76,7 @@ export interface RemoteApp {
   url: string
   camelName: string
   pascalName: string
+  federationName: string
   packageName: string
   entry: string
 }

@@ -5,7 +5,7 @@ import ora from 'ora'
 import fs from 'fs-extra'
 import path from 'path'
 import { execa } from 'execa'
-import type { MFEConfig } from '../types/index.js'
+import { copyTemplate } from '../utils/files.js'
 import { createRequire } from 'module'
 const require = createRequire(import.meta.url)
 const pkg = require('../../package.json')
@@ -73,159 +73,35 @@ export const initCommand = new Command('init')
 
       await fs.ensureDir(targetDir)
 
-      const dirs = ['apps', 'packages', 'tools', '.github/workflows']
-      for (const dir of dirs) {
+      const features: string[] = options.features ?? []
+      const templateVars = {
+        name,
+        organization: options.organization || '',
+        packageManager: options.packageManager,
+        mfeForgeVersion: pkg.version,
+        strictTs:        features.includes('strictTs'),
+        hasVitest:       features.includes('testing'),
+        hasPlaywright:   features.includes('testing'),
+        hasCI:           features.includes('ci'),
+        hasDocker:       features.includes('docker'),
+        hasDesignSystem: features.includes('designSystem'),
+      }
+
+      // Create directory skeleton
+      for (const dir of ['apps', 'packages', 'tools']) {
         await fs.ensureDir(path.join(targetDir, dir))
       }
-
-      const config: Partial<MFEConfig> = {
-        name,
-        organization: options.organization || undefined,
-        defaults: {
-          framework: 'react',
-          language: 'typescript',
-          styling: 'tailwind',
-          stateManagement: 'zustand',
-          packageManager: options.packageManager,
-        },
-        federation: {
-          plugin: '@originjs/vite-plugin-federation',
-          shared: ['react', 'react-dom', 'react-router-dom'],
-        },
-        designSystem: {
-          enabled: options.features?.includes('designSystem') ?? true,
-          tokens: true,
-          storybook: true,
-        },
-        testing: {
-          unit: options.features?.includes('testing') ? 'vitest' : 'none',
-          e2e: options.features?.includes('testing') ? 'playwright' : 'none',
-          coverage: true,
-        },
-        ci: {
-          provider: options.features?.includes('ci') ? 'github' : 'none',
-          docker: options.features?.includes('docker') ?? false,
-          deployTarget: 'none',
-        },
+      if (features.includes('ci')) {
+        await fs.ensureDir(path.join(targetDir, '.github/workflows'))
       }
 
-      await fs.writeFile(
-        path.join(targetDir, 'mfeforge.config.js'),
-        `/** @type {import('mfe-forge').MFEConfig} */\nexport default ${JSON.stringify(config, null, 2)};\n`
-      )
+      // Copy all stubs from init template
+      await copyTemplate('init', targetDir, templateVars)
 
-      const rootPkg = {
-        name,
-        private: true,
-        type: 'module',
-        workspaces: ['apps/*', 'packages/*'],
-        scripts: {
-          dev: 'mfe-forge dev',
-          'dev:host': 'mfe-forge dev --scope',
-          build: 'mfe-forge build',
-          test: 'mfe-forge test',
-          lint: 'eslint .',
-          format: 'prettier --write .',
-          'type-check': 'tsc --noEmit',
-          mfe: 'mfe-forge',
-        },
-        devDependencies: {
-          'mfe-forge': `^${pkg.version}`,
-          typescript: '~5.8.3',
-          prettier: '^3.2.5',
-          eslint: '^8.57.0',
-          '@types/node': '^20.0.0',
-        },
+      // Conditionally remove CI workflow if not requested
+      if (!features.includes('ci')) {
+        await fs.remove(path.join(targetDir, '.github'))
       }
-
-      await fs.writeJson(path.join(targetDir, 'package.json'), rootPkg, { spaces: 2 })
-
-      const tsConfig = {
-        compilerOptions: {
-          target: 'ES2022',
-          lib: ['ES2022', 'DOM', 'DOM.Iterable'],
-          module: 'ESNext',
-          moduleResolution: 'bundler',
-          jsx: 'react-jsx',
-          resolveJsonModule: true,
-          allowJs: false,
-          checkJs: false,
-          declaration: true,
-          declarationMap: true,
-          sourceMap: true,
-          outDir: './dist',
-          noEmit: true,
-          isolatedModules: true,
-          verbatimModuleSyntax: true,
-          esModuleInterop: true,
-          skipLibCheck: true,
-          strict: options.features?.includes('strictTs') ?? true,
-          noUnusedLocals: true,
-          noUnusedParameters: true,
-          noFallthroughCasesInSwitch: true,
-          forceConsistentCasingInFileNames: true,
-        },
-      }
-
-      await fs.writeJson(path.join(targetDir, 'tsconfig.base.json'), tsConfig, { spaces: 2 })
-
-      await fs.writeFile(
-        path.join(targetDir, '.gitignore'),
-        `node_modules
-dist
-build
-*.local
-.env
-.env.*
-!.env.example
-.vscode/*
-!.vscode/extensions.json
-.idea
-*.log
-.DS_Store
-coverage
-.nyc_output
-*.tsbuildinfo
-`
-      )
-
-      await fs.writeFile(
-        path.join(targetDir, 'README.md'),
-        `# ${name}
-
-Generated with [MFE Forge](https://github.com/D-Rayno/mfe-forge).
-
-## Quick Start
-
-\`\`\`bash
-# Install dependencies
-${options.packageManager} install
-
-# Start development (runs all MFEs)
-${options.packageManager} dev
-
-# Build for production
-${options.packageManager} build
-
-# Run tests
-${options.packageManager} test
-\`\`\`
-
-## Project Structure
-
-\`\`\`
-.
-├── apps/           # Micro Frontend applications
-├── packages/       # Shared packages
-├── tools/          # Build tools and scripts
-└── mfeforge.config.ts  # MFE Forge configuration
-\`\`\`
-
-## Documentation
-
-- [MFE Forge Docs](https://mfe-forge.dev)
-`
-      )
 
       spinner.succeed('Project structure created')
 

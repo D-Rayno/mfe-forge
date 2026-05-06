@@ -1,0 +1,24 @@
+/** @type {import('mfe-forge').MFEConfig} */
+export default {
+  name: '{{name}}',
+  {{#organization}}organization: '{{organization}}',{{/organization}}
+  defaults: {
+    framework: 'react',
+    language: 'typescript',
+    styling: 'tailwind',
+    stateManagement: 'zustand',
+    packageManager: '{{packageManager}}',
+  },
+  federation: {
+    shared: ['react', 'react-dom', 'react-router-dom'],
+  },
+  dev: { portRange: [3000, 3999], autoStartHost: true, parallelLimit: 10, cors: true },
+  testing: {
+    unit: '{{#hasVitest}}vitest{{/hasVitest}}{{^hasVitest}}none{{/hasVitest}}',
+    e2e: '{{#hasPlaywright}}playwright{{/hasPlaywright}}{{^hasPlaywright}}none{{/hasPlaywright}}',
+  },
+  ci: {
+    provider: '{{#hasCI}}github{{/hasCI}}{{^hasCI}}none{{/hasCI}}',
+    docker: {{#hasDocker}}true{{/hasDocker}}{{^hasDocker}}false{{/hasDocker}},
+  },
+};

@@ -23,18 +23,22 @@ export const doctorCommand = new Command('doctor')
       checks.push(`Node version: ${nodeVersion} ✅`)
     }
 
-    // Check 2: Package manager
+    // Check 2: Package manager lockfile
     const pm = context.config.defaults.packageManager
-    try {
-      await fs.access(
-        path.join(
-          context.rootDir,
-          pm === 'pnpm' ? 'pnpm-lock.yaml' : pm === 'bun' ? 'bun.lock' : 'package-lock.json'
-        )
-      )
+    const lockFiles: Record<string, string[]> = {
+      pnpm: ['pnpm-lock.yaml'],
+      bun:  ['bun.lock', 'bun.lockb'],   // support both text and binary formats
+      npm:  ['package-lock.json'],
+    }
+    const candidates = lockFiles[pm] ?? []
+    const lockFound = candidates.some(f =>
+      fs.existsSync(path.join(context.rootDir, f))
+    )
+
+    if (!lockFound) {
+      issues.push(`No lock file found for ${pm}. Run \`${pm} install\``)
+    } else {
       checks.push(`Lock file present for ${pm} ✅`)
-    } catch {
-      issues.push(`No lock file found for ${pm}. Run ${pm} install`)
     }
 
     // Check 3: Port conflicts

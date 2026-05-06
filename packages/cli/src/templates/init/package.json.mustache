@@ -1,0 +1,20 @@
+{
+  "name": "{{name}}",
+  "private": true,
+  "type": "module",
+  "workspaces": ["apps/*", "packages/*"],
+  "scripts": {
+    "dev": "mfe-forge dev",
+    "build": "mfe-forge build",
+    "test": "mfe-forge test",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "type-check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "mfe-forge": "^{{mfeForgeVersion}}",
+    "typescript": "~5.8.3",
+    "prettier": "^3.2.5",
+    "@types/node": "^20.0.0"
+  }
+}
