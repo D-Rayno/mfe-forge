@@ -1,0 +1,19 @@
+name: Dependency Audit
+
+on:
+  schedule:
+    - cron: '17 3 * * 1'
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          package-manager-cache: false
+      - run: npm install --global bun@1.1.0
+      - run: bun install
+      - run: npm audit --omit=dev --audit-level=high
