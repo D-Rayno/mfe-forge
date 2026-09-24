@@ -3,13 +3,20 @@ import { applyTokens } from './index.js'
 
 describe('applyTokens', () => {
   it('writes color, radius and font tokens to the target element', () => {
-    const target = document.createElement('div')
+    const values = new Map<string, string>()
+    const target = {
+      style: {
+        setProperty: (name: string, value: string) => {
+          values.set(name, value)
+        },
+      },
+    } as unknown as HTMLElement
 
     applyTokens(target)
 
-    expect(target.style.getPropertyValue('--color-background')).toBe('oklch(0.145 0 0)')
-    expect(target.style.getPropertyValue('--radius-md')).toBe('0.5rem')
-    expect(target.style.getPropertyValue('--font-sans')).toContain('Inter')
-    expect(target.style.getPropertyValue('--font-mono')).toContain('JetBrains Mono')
+    expect(values.get('--color-background')).toBe('oklch(0.145 0 0)')
+    expect(values.get('--radius-md')).toBe('0.5rem')
+    expect(values.get('--font-sans')).toContain('Inter')
+    expect(values.get('--font-mono')).toContain('JetBrains Mono')
   })
 })
