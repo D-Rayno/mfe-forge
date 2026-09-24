@@ -1,6 +1,6 @@
 {
   "name": "mfe-forge-monorepo",
-  "version": "8.1.0",
+  "version": "0.0.0",
   "private": true,
   "description": "Production-ready Micro Frontend framework for Vite + React + Module Federation",
   "type": "module",
@@ -26,13 +26,10 @@
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.1",
-    "@testing-library/react": "^16.3.3",
-    "jsdom": "^25.0.1",
     "prettier": "^3.2.5",
     "turbo": "^2.0.0",
     "typescript": "~5.8.3",
-    "vitepress": "^1.0.0",
-    "vitest": "^1.5.0"
+    "vitepress": "^1.0.0"
   },
   "engines": {
     "node": ">=20.0.0",
