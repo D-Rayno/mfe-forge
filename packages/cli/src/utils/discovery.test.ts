@@ -32,8 +32,12 @@ describe('discovery', () => {
       expect(discoverHosts(context)).toEqual(['checkout/host'])
       const apps = discoverApps(context)
       expect(apps).toHaveLength(2)
-      expect(apps.map((app) => app.name)).toEqual(['checkout/cart', 'checkout/host'])
-      expect(apps[0]).toMatchObject({
+
+      const names = apps.map((app) => app.name).sort()
+      expect(names).toEqual(['checkout/cart', 'checkout/host'])
+
+      const cart = apps.find((app) => app.name === 'checkout/cart')
+      expect(cart).toMatchObject({
         scope: 'checkout',
         port: 3201,
         federationName: 'checkoutCartApp',
