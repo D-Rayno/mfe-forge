@@ -14,7 +14,7 @@
     },
     "packages/cli": {
       "name": "mfe-forge",
-      "version": "8.0.7",
+      "version": "0.0.0",
       "bin": {
         "mfe-forge": "./dist/bin/index.js",
         "mfe": "./dist/bin/index.js",
@@ -44,17 +44,21 @@
         "@types/mustache": "^4.2.5",
         "@types/semver": "^7.5.8",
         "tsup": "^8.0.0",
+        "vitest": "^1.5.0",
       },
     },
     "packages/core": {
       "name": "@mfe-forge/core",
-      "version": "8.0.7",
+      "version": "0.0.0",
       "devDependencies": {
         "@types/node": "^20.0.0",
         "@types/react": "^19.0.0",
         "@types/react-dom": "^19.0.0",
+        "react": "^19.0.0",
+        "react-dom": "^19.0.0",
         "tsup": "^8.0.0",
         "typescript": "~5.8.3",
+        "vitest": "^1.5.0",
       },
       "peerDependencies": {
         "react": "^19.0.0",
@@ -63,19 +67,24 @@
     },
     "packages/design": {
       "name": "@mfe-forge/design",
-      "version": "8.0.7",
+      "version": "0.0.0",
       "devDependencies": {
         "tsup": "^8.0.0",
         "typescript": "~5.8.3",
+        "vitest": "^1.5.0",
       },
     },
     "packages/router": {
       "name": "@mfe-forge/router",
-      "version": "8.0.7",
+      "version": "0.0.0",
       "devDependencies": {
         "@types/react": "^19.0.0",
+        "react": "^19.0.0",
+        "react-dom": "^19.0.0",
+        "react-router-dom": "^7.0.0",
         "tsup": "^8.0.0",
         "typescript": "~5.8.3",
+        "vitest": "^1.5.0",
       },
       "peerDependencies": {
         "react": "^19.0.0",
@@ -85,10 +94,11 @@
     },
     "packages/store": {
       "name": "@mfe-forge/store",
-      "version": "8.0.7",
+      "version": "0.0.0",
       "devDependencies": {
         "tsup": "^8.0.0",
         "typescript": "~5.8.3",
+        "vitest": "^1.5.0",
         "zustand": "^5.0.0",
       },
       "peerDependencies": {
@@ -105,8 +115,9 @@
     },
     "packages/testing": {
       "name": "@mfe-forge/testing",
-      "version": "8.0.7",
+      "version": "0.0.0",
       "devDependencies": {
+        "@testing-library/react": "^16.3.2",
         "@types/react": "^19.0.0",
         "tsup": "^8.0.0",
         "typescript": "~5.8.3",
@@ -119,6 +130,7 @@
       },
     },
   },
+
   "packages": {
     "@algolia/abtesting": ["@algolia/abtesting@1.18.0", "", { "dependencies": { "@algolia/client-common": "5.52.0", "@algolia/requester-browser-xhr": "5.52.0", "@algolia/requester-fetch": "5.52.0", "@algolia/requester-node-http": "5.52.0" } }, "sha512-8siuLG+FIns1AjZ/g2SDVwHz9S+ObacDQISEJvS8XsNei1zl3FXqfqQrBpmrG7ACWCyesXHbicMJtvRbg00FEw=="],
 
